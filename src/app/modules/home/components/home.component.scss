@@ -1,0 +1,12 @@
+ActionBar {
+  background-color: var(--bg-secondary-color);
+
+  Label {
+    color: var(--text-primary-color);
+    font-size: 20px;
+  }
+}
+
+GridLayout {
+  background-color: var(--bg-primary-color);
+}

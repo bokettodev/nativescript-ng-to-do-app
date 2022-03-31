@@ -2,9 +2,10 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "@nativescript/angular";
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./components/home.component";
+import { ToDoItemsModule } from "../../shared/modules/to-do-items/to-do-items.module";
 
 @NgModule({
-  imports: [NativeScriptCommonModule, HomeRoutingModule],
+  imports: [NativeScriptCommonModule, HomeRoutingModule, ToDoItemsModule],
   declarations: [HomeComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })

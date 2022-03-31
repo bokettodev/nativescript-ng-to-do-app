@@ -1,0 +1,11 @@
+FlexboxLayout {
+  background-color: var(--bg-secondary-color);
+  border-radius: 20px;
+  padding: 25px;
+
+  Label {
+    color: var(--text-primary-color);
+    font-size: 14px;
+    font-weight: bold;
+  }
+}

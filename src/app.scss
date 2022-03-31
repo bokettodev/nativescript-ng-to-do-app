@@ -1,0 +1,10 @@
+@import "@nativescript/theme/css/core.css";
+@import "@nativescript/theme/css/default.css";
+
+.ns-root {
+  --bg-primary-color: #3b3745;
+  --bg-secondary-color: #24222e;
+
+  --text-primary-color: white;
+  --text-secondary-color: gray;
+}
