@@ -1,7 +1,11 @@
 <ScrollView>
   <FlexboxLayout class="items">
-    <GridLayout *ngFor="let i of arr" class="item">
-      <ToDoItem></ToDoItem>
+    <GridLayout *ngFor="let item of items; trackBy: trackByIdFn" class="item">
+      <ToDoItem
+        [item]="item"
+        (onToggle)="toggleItem($event)"
+        (onDelete)="deleteItem($event)"
+      ></ToDoItem>
     </GridLayout>
   </FlexboxLayout>
 </ScrollView>

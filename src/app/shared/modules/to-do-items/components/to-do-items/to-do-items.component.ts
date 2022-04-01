@@ -1,14 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
+import { trackByFn } from "~/app/shared/functions/track-by-fn";
 
 @Component({
   selector: "ToDoItems",
   templateUrl: "./to-do-items.component.html",
   styleUrls: ["./to-do-items.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoItemsComponent implements OnInit {
-  arr = [
-    111, 222, 333, 444, 555, 666, 777, 888, 999, 999, 999, 999, 999, 999, 999,
-    999, 999, 999, 999,
+  readonly trackByIdFn = trackByFn("id");
+  items: ToDoItem[] = [
+    { id: 0, text: "111", done: false },
+    { id: 1, text: "222", done: false },
   ];
 
   constructor() {
@@ -17,5 +21,13 @@ export class ToDoItemsComponent implements OnInit {
 
   ngOnInit(): void {
     // Init your component properties here.
+  }
+
+  toggleItem(item: ToDoItem): void {
+    item.done = !item.done;
+  }
+
+  deleteItem(item: ToDoItem): void {
+    this.items = this.items.filter((i) => i !== item);
   }
 }

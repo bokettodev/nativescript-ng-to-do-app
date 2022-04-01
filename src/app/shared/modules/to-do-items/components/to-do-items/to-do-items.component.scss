@@ -1,8 +1,8 @@
 .items {
+  --indent: 25px;
   flex-direction: column;
-  padding: 10%;
 }
 
 .item {
-  margin: 20px 0;
+  margin: var(--indent);
 }

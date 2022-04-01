@@ -1,3 +1,7 @@
-<FlexboxLayout>
-  <Label text="456s"></Label>
+<FlexboxLayout
+  class="item"
+  [class.item--done]="item.done"
+  (tap)="onToggle.emit(item)"
+>
+  <Label [text]="item.text"></Label>
 </FlexboxLayout>

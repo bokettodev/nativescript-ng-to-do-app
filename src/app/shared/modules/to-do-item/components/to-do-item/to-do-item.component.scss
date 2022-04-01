@@ -1,4 +1,4 @@
-FlexboxLayout {
+.item {
   background-color: var(--bg-secondary-color);
   border-radius: 20px;
   padding: 25px;
@@ -7,5 +7,12 @@ FlexboxLayout {
     color: var(--text-primary-color);
     font-size: 14px;
     font-weight: bold;
+  }
+
+  &--done {
+    Label {
+      color: var(--text-secondary-color);
+      text-decoration: line-through;
+    }
   }
 }
