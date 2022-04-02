@@ -1,12 +1,24 @@
 ActionBar {
   background-color: var(--bg-secondary-color);
-
-  Label {
-    color: var(--text-primary-color);
-    font-size: 20px;
-  }
+  color: var(--text-primary-color);
 }
 
-GridLayout {
+.container {
+  --indent: 10;
   background-color: var(--bg-primary-color);
+
+  .items {
+    height: 100%;
+    width: 100%;
+
+    > GridLayout {
+      padding: 0 var(--indent);
+      margin: var(--indent) 0;
+    }
+  }
+
+  .input {
+    height: 100%;
+    padding: 0 var(--indent) var(--indent);
+  }
 }

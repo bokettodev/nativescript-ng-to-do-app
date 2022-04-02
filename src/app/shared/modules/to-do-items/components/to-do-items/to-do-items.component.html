@@ -1,11 +1,13 @@
-<ScrollView>
-  <FlexboxLayout class="items">
-    <GridLayout *ngFor="let item of items; trackBy: trackByIdFn" class="item">
-      <ToDoItem
-        [item]="item"
-        (onToggle)="toggleItem($event)"
-        (onDelete)="deleteItem($event)"
-      ></ToDoItem>
-    </GridLayout>
-  </FlexboxLayout>
-</ScrollView>
+<FlexboxLayout class="items">
+  <GridLayout
+    *ngFor="let item of items; trackBy: trackByIdFn; let first = first"
+    class="item"
+    [class.item--first]="first"
+  >
+    <ToDoItem
+      [item]="item"
+      (onToggle)="toggleItem($event)"
+      (onDelete)="deleteItem($event)"
+    ></ToDoItem>
+  </GridLayout>
+</FlexboxLayout>

@@ -1,7 +1,17 @@
-<ActionBar>
-  <Label text="ToDoApp"></Label>
-</ActionBar>
+<ActionBar title="ToDoApp"></ActionBar>
 
-<GridLayout>
-  <ToDoItems></ToDoItems>
+<GridLayout rows="*, 50" class="container">
+  <ScrollView row="0" class="items">
+    <GridLayout>
+      <ToDoItems [items]="items"></ToDoItems>
+    </GridLayout>
+  </ScrollView>
+
+  <GridLayout row="1" class="input">
+    <InputText
+      height="100%"
+      hint="Enter yout task..."
+      (returnPress)="addItem($event)"
+    ></InputText>
+  </GridLayout>
 </GridLayout>

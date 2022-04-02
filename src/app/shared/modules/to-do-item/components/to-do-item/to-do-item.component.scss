@@ -1,11 +1,15 @@
 .item {
+  align-items: center;
   background-color: var(--bg-secondary-color);
-  border-radius: 20px;
-  padding: 25px;
+  border-radius: 5;
+  border-width: 0;
+  padding: 0 10;
+  height: 40;
+  width: 100%;
 
   Label {
     color: var(--text-primary-color);
-    font-size: 14px;
+    font-size: 14;
     font-weight: bold;
   }
 

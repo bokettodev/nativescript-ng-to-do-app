@@ -1,8 +1,11 @@
 .items {
-  --indent: 25px;
   flex-direction: column;
 }
 
 .item {
-  margin: var(--indent);
+  margin-top: 10;
+
+  &--first {
+    margin-top: 0;
+  }
 }
