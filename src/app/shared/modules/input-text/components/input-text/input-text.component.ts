@@ -18,19 +18,18 @@ import { TextField } from "@nativescript/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputTextComponent implements OnChanges {
-  @ViewChild("textField", { static: true })
-  readonly textFieldElementRef: ElementRef<TextField>;
-
   @Input() width: string | number = "100%";
   @Input() height: string | number = 40;
   @Input() hint = "Type here...";
   @Input() text: string;
 
+  @Output() readonly textChange = new EventEmitter<TextField>();
   @Output() readonly returnPress = new EventEmitter<TextField>();
+  @Output() readonly focus = new EventEmitter<TextField>();
+  @Output() readonly blur = new EventEmitter<TextField>();
 
-  get textField(): TextField {
-    return this.textFieldElementRef.nativeElement;
-  }
+  @ViewChild("textField", { static: true })
+  private readonly textFieldElementRef!: ElementRef<TextField>;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.text) {
@@ -38,7 +37,23 @@ export class InputTextComponent implements OnChanges {
     }
   }
 
+  onTextChange(): void {
+    this.textChange.emit(this.textField);
+  }
+
   onReturnPress(): void {
     this.returnPress.emit(this.textField);
+  }
+
+  onFocus(): void {
+    this.focus.emit(this.textField);
+  }
+
+  onBlur(): void {
+    this.blur.emit(this.textField);
+  }
+
+  private get textField(): TextField {
+    return this.textFieldElementRef.nativeElement;
   }
 }

@@ -1,6 +1,6 @@
 ActionBar {
   background-color: var(--bg-secondary-color);
-  color: var(--text-primary-color);
+  color: var(--text-secondary-color);
 }
 
 .container {
@@ -12,13 +12,13 @@ ActionBar {
     width: 100%;
 
     > GridLayout {
-      padding: 0 var(--indent);
-      margin: var(--indent) 0;
+      padding: var(--indent);
     }
   }
 
   .input {
+    background-color: var(--bg-secondary-color);
     height: 100%;
-    padding: 0 var(--indent) var(--indent);
+    padding: var(--indent);
   }
 }

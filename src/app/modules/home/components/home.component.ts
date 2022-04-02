@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { TextField } from "@nativescript/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+} from "@angular/core";
+import { ScrollView, TextField } from "@nativescript/core";
 import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
 
 @Component({
@@ -8,8 +13,11 @@ import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
   styleUrls: ["./home.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
-  uid: number = 0;
+export class HomeComponent {
+  @ViewChild("itemsScrollView", { static: true })
+  private readonly itemsScrollViewElementRef!: ElementRef<ScrollView>;
+
+  private uid: number = 0;
   items: ToDoItem[] = [
     { id: this.uid++, text: this.uid.toString(), done: false },
     { id: this.uid++, text: this.uid.toString(), done: false },
@@ -30,8 +38,6 @@ export class HomeComponent implements OnInit {
     { id: this.uid++, text: this.uid.toString(), done: false },
   ];
 
-  ngOnInit(): void {}
-
   addItem(textField: TextField): void {
     textField.text = textField.text?.trim();
     if (!textField.text) {
@@ -47,5 +53,14 @@ export class HomeComponent implements OnInit {
       ...this.items,
     ];
     textField.text = "";
+
+    // setTimeout to wait for the keyboard to collapse.
+    setTimeout(() => {
+      this.itemsScrollView.scrollToVerticalOffset(0, true);
+    });
+  }
+
+  private get itemsScrollView(): ScrollView {
+    return this.itemsScrollViewElementRef.nativeElement;
   }
 }

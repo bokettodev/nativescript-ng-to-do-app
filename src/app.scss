@@ -2,9 +2,11 @@
 @import "@nativescript/theme/css/default.css";
 
 .ns-root {
-  --bg-primary-color: #3b3745;
-  --bg-secondary-color: #24222e;
+  --bg-primary-color: #393e46;
+  --bg-secondary-color: #5b636e;
+  --bg-accent-color: #9e8441;
 
-  --text-primary-color: white;
-  --text-secondary-color: gray;
+  --text-primary-color: #5b636e;
+  --text-secondary-color: #f1faee;
+  --text-tertiary-color: #b8b8b8;
 }

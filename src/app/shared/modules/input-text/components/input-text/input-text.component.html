@@ -3,5 +3,8 @@
   [width]="width"
   [height]="height"
   [hint]="hint"
+  (textChange)="onTextChange()"
   (returnPress)="onReturnPress()"
+  (focus)="onFocus()"
+  (blur)="onBlur()"
 ></TextField>
