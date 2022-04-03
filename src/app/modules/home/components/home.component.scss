@@ -8,9 +8,6 @@ ActionBar {
   background-color: var(--bg-primary-color);
 
   .items {
-    height: 100%;
-    width: 100%;
-
     > GridLayout {
       padding: var(--indent);
     }
@@ -18,7 +15,7 @@ ActionBar {
 
   .input {
     background-color: var(--bg-secondary-color);
-    height: 100%;
+    height: 60;
     padding: var(--indent);
   }
 }

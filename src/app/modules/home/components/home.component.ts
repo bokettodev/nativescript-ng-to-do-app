@@ -14,10 +14,7 @@ import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  @ViewChild("itemsScrollView", { static: true })
-  private readonly itemsScrollViewElementRef!: ElementRef<ScrollView>;
-
-  private uid: number = 0;
+  uid: number = 0;
   items: ToDoItem[] = [
     { id: this.uid++, text: this.uid.toString(), done: false },
     { id: this.uid++, text: this.uid.toString(), done: false },
@@ -38,6 +35,9 @@ export class HomeComponent {
     { id: this.uid++, text: this.uid.toString(), done: false },
   ];
 
+  @ViewChild("itemsScrollView", { static: true })
+  private readonly itemsScrollViewElementRef!: ElementRef<ScrollView>;
+
   addItem(textField: TextField): void {
     textField.text = textField.text?.trim();
     if (!textField.text) {
@@ -54,10 +54,7 @@ export class HomeComponent {
     ];
     textField.text = "";
 
-    // setTimeout to wait for the keyboard to collapse.
-    setTimeout(() => {
-      this.itemsScrollView.scrollToVerticalOffset(0, true);
-    });
+    this.itemsScrollView.scrollToVerticalOffset(0, true);
   }
 
   private get itemsScrollView(): ScrollView {
