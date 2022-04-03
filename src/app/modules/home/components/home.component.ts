@@ -16,39 +16,160 @@ import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
 export class HomeComponent {
   uid: number = 0;
   items: ToDoItem[] = [
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
-    { id: this.uid++, text: this.uid.toString(), done: false },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
+    {
+      id: this.uid++,
+      text: this.uid.toString(),
+      done: false,
+      createdAt: new Date(),
+      editedAt: new Date(),
+    },
   ];
 
   @ViewChild("itemsScrollView", { static: true })
   private readonly itemsScrollViewElementRef!: ElementRef<ScrollView>;
+
+  toggleItem(item: ToDoItem): void {
+    item.done = !item.done;
+    item.editedAt = new Date();
+
+    this.items.sort((a, b) => {
+      if (a.done !== b.done) {
+        return +a.done - +b.done;
+      }
+      return +b.editedAt.valueOf() - +a.editedAt.valueOf();
+    });
+  }
+
+  deleteItem(item: ToDoItem): void {
+    this.items = this.items.filter((i) => i !== item);
+  }
 
   addItem(textField: TextField): void {
     textField.text = textField.text?.trim();
     if (!textField.text) {
       return;
     }
+    const date = new Date();
 
     this.items = [
       {
         id: this.uid++,
         text: textField.text,
         done: false,
+        createdAt: date,
+        editedAt: date,
       },
       ...this.items,
     ];

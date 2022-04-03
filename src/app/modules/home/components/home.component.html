@@ -11,7 +11,11 @@
 
   <ScrollView #itemsScrollView class="items">
     <GridLayout>
-      <ToDoItems [items]="items"></ToDoItems>
+      <ToDoItems
+        [items]="items"
+        (onToggle)="toggleItem($event)"
+        (onDelete)="deleteItem($event)"
+      ></ToDoItems>
     </GridLayout>
   </ScrollView>
 </DockLayout>
