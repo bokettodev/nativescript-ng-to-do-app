@@ -5,6 +5,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { ScrollView, TextField } from "@nativescript/core";
+import { v4 as uuidv4 } from "uuid";
 import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
 
 @Component({
@@ -14,123 +15,122 @@ import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  uid: number = 0;
   items: ToDoItem[] = [
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
     },
     {
-      id: this.uid++,
-      text: this.uid.toString(),
+      id: null,
+      text: null,
       done: false,
       createdAt: new Date(),
       editedAt: new Date(),
@@ -139,6 +139,14 @@ export class HomeComponent {
 
   @ViewChild("itemsScrollView", { static: true })
   private readonly itemsScrollViewElementRef!: ElementRef<ScrollView>;
+
+  constructor() {
+    this.items.forEach((i) => {
+      const uuid = uuidv4();
+      i.id = uuid;
+      i.text = uuid;
+    });
+  }
 
   toggleItem(item: ToDoItem): void {
     item.done = !item.done;
@@ -165,7 +173,7 @@ export class HomeComponent {
 
     this.items = [
       {
-        id: this.uid++,
+        id: uuidv4(),
         text: textField.text,
         done: false,
         createdAt: date,
