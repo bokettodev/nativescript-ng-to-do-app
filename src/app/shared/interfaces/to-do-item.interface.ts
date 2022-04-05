@@ -1,5 +1,5 @@
 export interface ToDoItem {
-  id: number;
+  id: string;
   done: boolean;
   text: string;
   createdAt: Date;

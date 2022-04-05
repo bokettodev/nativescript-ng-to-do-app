@@ -5,8 +5,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { ScrollView, TextField } from "@nativescript/core";
-import { v4 as uuidv4 } from "uuid";
 import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
+import { uuid } from "~/app/shared/functions/uuid";
 
 @Component({
   selector: "Home",
@@ -142,9 +142,9 @@ export class HomeComponent {
 
   constructor() {
     this.items.forEach((i) => {
-      const uuid = uuidv4();
-      i.id = uuid;
-      i.text = uuid;
+      const id = uuid();
+      i.id = id;
+      i.text = id;
     });
   }
 
@@ -173,7 +173,7 @@ export class HomeComponent {
 
     this.items = [
       {
-        id: uuidv4(),
+        id: uuid(),
         text: textField.text,
         done: false,
         createdAt: date,
