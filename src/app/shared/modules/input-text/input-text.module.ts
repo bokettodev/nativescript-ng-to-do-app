@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "@nativescript/angular";
-import { InputTextComponent } from "./components/input-text/input-text.component";
+import { InputTextComponent } from "./components";
 
 @NgModule({
   declarations: [InputTextComponent],

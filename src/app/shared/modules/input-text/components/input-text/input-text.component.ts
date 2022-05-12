@@ -29,7 +29,7 @@ export class InputTextComponent implements OnChanges {
   @Output() readonly blur = new EventEmitter<TextField>();
 
   @ViewChild("textField", { static: true })
-  private readonly textFieldElementRef!: ElementRef<TextField>;
+  private readonly textFieldElementRef: ElementRef<TextField>;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.text) {

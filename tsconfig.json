@@ -9,11 +9,7 @@
     "noEmitOnError": true,
     "skipLibCheck": true,
     "lib": ["es2017", "dom"],
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"],
-      "@/*": ["src/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["src/tests/**/*.ts", "src/**/*.ios.ts", "src/**/*.android.ts"],
   "files": ["./src/main.ts", "./references.d.ts", "./src/polyfills.ts"],

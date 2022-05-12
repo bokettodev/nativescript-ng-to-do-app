@@ -5,8 +5,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { ScrollView, TextField } from "@nativescript/core";
-import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
-import { uuid } from "~/app/shared/functions/uuid";
+import { ToDoItem } from "../../interfaces";
+import { uuid } from "../../../../shared/functions";
 
 @Component({
   selector: "Home",
@@ -138,7 +138,7 @@ export class HomeComponent {
   ];
 
   @ViewChild("itemsScrollView", { static: true })
-  private readonly itemsScrollViewElementRef!: ElementRef<ScrollView>;
+  private readonly itemsScrollViewElementRef: ElementRef<ScrollView>;
 
   constructor() {
     this.items.forEach((i) => {

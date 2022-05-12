@@ -5,8 +5,8 @@ import {
   Input,
   Output,
 } from "@angular/core";
-import { ToDoItem } from "~/app/shared/interfaces/to-do-item.interface";
-import { trackByFn } from "~/app/shared/functions/track-by-fn";
+import { ToDoItem } from "../../interfaces";
+import { trackByFn } from "../../../../shared/functions";
 
 @Component({
   selector: "ToDoItems",
@@ -16,16 +16,16 @@ import { trackByFn } from "~/app/shared/functions/track-by-fn";
 })
 export class ToDoItemsComponent {
   @Input() items: ToDoItem[];
-  @Output() readonly onToggle = new EventEmitter<ToDoItem>();
-  @Output() readonly onDelete = new EventEmitter<ToDoItem>();
+  @Output() readonly toggle = new EventEmitter<ToDoItem>();
+  @Output() readonly delete = new EventEmitter<ToDoItem>();
 
   readonly trackByIdFn = trackByFn("id");
 
   toggleItem(item: ToDoItem): void {
-    this.onToggle.emit(item);
+    this.toggle.emit(item);
   }
 
   deleteItem(item: ToDoItem): void {
-    this.onDelete.emit(item);
+    this.delete.emit(item);
   }
 }

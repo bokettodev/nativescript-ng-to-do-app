@@ -1,7 +1,9 @@
 <FlexboxLayout
+  #itemRef
   class="item"
   [class.item--done]="item.done"
-  (tap)="onToggle.emit(item)"
+  (tap)="onTap()"
+  (pan)="onPan($event)"
 >
   <Label [text]="item.text"></Label>
 </FlexboxLayout>
