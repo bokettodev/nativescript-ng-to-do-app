@@ -13,6 +13,7 @@ import {
   PanGestureEventData,
 } from "@nativescript/core";
 import { ToDoItem } from "../../interfaces";
+import { HomeStoreService } from "../../services";
 
 @Component({
   selector: "ToDoItem",
@@ -26,6 +27,10 @@ export class ToDoItemComponent {
   @Output() readonly toggle = new EventEmitter<ToDoItem>();
   @Output() readonly delete = new EventEmitter<ToDoItem>();
 
+  private lastPanEvent?: PanGestureEventData;
+
+  constructor(private readonly homeStore: HomeStoreService) {}
+
   get itemView(): FlexboxLayout {
     return this.itemRef.nativeElement;
   }
@@ -34,18 +39,41 @@ export class ToDoItemComponent {
     this.toggle.emit(this.item);
   }
 
-  onPan({ deltaX, state }: PanGestureEventData): void {
-    if (state === GestureStateTypes.ended) {
-      this.onPanEnd(deltaX);
+  onPan(event: PanGestureEventData): void {
+    if (
+      event.state === GestureStateTypes.ended ||
+      event.state === GestureStateTypes.cancelled
+    ) {
+      this.onPanEnd(event);
     } else {
-      this.itemView.translateX = deltaX;
+      this.onPanBegunOrChanged(event);
     }
+    this.lastPanEvent = event;
   }
 
-  private onPanEnd(deltaX: number): void {
+  private onPanBegunOrChanged(event: PanGestureEventData): void {
+    const deltaYToLast = this.lastPanEvent
+      ? Math.abs(this.lastPanEvent.deltaY - event.deltaY)
+      : event.deltaY;
+
+    const deltaXToLast = this.lastPanEvent
+      ? Math.abs(this.lastPanEvent.deltaX - event.deltaX)
+      : event.deltaX;
+
+    if (deltaYToLast > deltaXToLast) {
+      this.homeStore.itemsScrollView.isUserInteractionEnabled = true;
+      return;
+    }
+
+    this.homeStore.itemsScrollView.isUserInteractionEnabled = false;
+    this.itemView.translateX = event.deltaX;
+  }
+
+  private onPanEnd(event: PanGestureEventData): void {
+    this.homeStore.itemsScrollView.isUserInteractionEnabled = true;
     const itemViewHalfWidth = this.itemView.getActualSize().width / 2;
 
-    if (Math.abs(deltaX) > itemViewHalfWidth) {
+    if (Math.abs(event.deltaX) > itemViewHalfWidth) {
       this.delete.emit(this.item);
     } else {
       this.itemView.translateX = 0;

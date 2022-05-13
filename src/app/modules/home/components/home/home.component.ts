@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
 } from "@angular/core";
 import { ScrollView, TextField } from "@nativescript/core";
 import { ToDoItem } from "../../interfaces";
 import { uuid } from "../../../../shared/functions";
+import { HomeStoreService } from "../../services";
 
 @Component({
   selector: "Home",
@@ -14,138 +16,16 @@ import { uuid } from "../../../../shared/functions";
   styleUrls: ["./home.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
-  items: ToDoItem[] = [
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-    {
-      id: null,
-      text: null,
-      done: false,
-      createdAt: new Date(),
-      editedAt: new Date(),
-    },
-  ];
+export class HomeComponent implements OnInit {
+  items?: ToDoItem[];
 
   @ViewChild("itemsScrollView", { static: true })
   private readonly itemsScrollViewElementRef: ElementRef<ScrollView>;
 
-  constructor() {
-    this.items.forEach((i) => {
-      const id = uuid();
-      i.id = id;
-      i.text = id;
-    });
+  constructor(private readonly homeStore: HomeStoreService) {}
+
+  ngOnInit(): void {
+    this.homeStore.itemsScrollView = this.itemsScrollView;
   }
 
   toggleItem(item: ToDoItem): void {
@@ -161,6 +41,9 @@ export class HomeComponent {
   }
 
   deleteItem(item: ToDoItem): void {
+    if (!this.items?.length) {
+      return;
+    }
     this.items = this.items.filter((i) => i !== item);
   }
 
@@ -169,20 +52,18 @@ export class HomeComponent {
     if (!textField.text) {
       return;
     }
+
     const date = new Date();
+    const item: ToDoItem = {
+      id: uuid(),
+      text: textField.text,
+      done: false,
+      createdAt: date,
+      editedAt: date,
+    };
 
-    this.items = [
-      {
-        id: uuid(),
-        text: textField.text,
-        done: false,
-        createdAt: date,
-        editedAt: date,
-      },
-      ...this.items,
-    ];
+    this.items = this.items ? [item, ...this.items] : [item];
     textField.text = "";
-
     this.itemsScrollView.scrollToVerticalOffset(0, true);
   }
 

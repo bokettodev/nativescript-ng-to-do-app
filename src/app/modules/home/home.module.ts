@@ -7,10 +7,12 @@ import {
   ToDoItemComponent,
   ToDoItemsComponent,
 } from "./components";
+import { HomeStoreService } from "./services";
 
 @NgModule({
   imports: [NativeScriptCommonModule, HomeRoutingModule, InputTextModule],
   declarations: [HomeComponent, ToDoItemComponent, ToDoItemsComponent],
+  providers: [HomeStoreService],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class HomeModule {}
