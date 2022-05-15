@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -22,22 +23,20 @@ export class HomeComponent implements OnInit {
   @ViewChild("itemsScrollView", { static: true })
   private readonly itemsScrollViewElementRef: ElementRef<ScrollView>;
 
-  constructor(private readonly homeStore: HomeStoreService) {}
+  constructor(
+    private readonly homeStore: HomeStoreService,
+    private readonly cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.homeStore.itemsScrollView = this.itemsScrollView;
+    this.initListeners();
   }
 
   toggleItem(item: ToDoItem): void {
     item.done = !item.done;
     item.editedAt = new Date();
-
-    this.items.sort((a, b) => {
-      if (a.done !== b.done) {
-        return +a.done - +b.done;
-      }
-      return +b.editedAt.valueOf() - +a.editedAt.valueOf();
-    });
+    this.homeStore.setItems({ items: this.items });
   }
 
   deleteItem(item: ToDoItem): void {
@@ -45,6 +44,7 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.items = this.items.filter((i) => i !== item);
+    this.homeStore.setItems({ items: this.items });
   }
 
   addItem(textField: TextField): void {
@@ -63,11 +63,19 @@ export class HomeComponent implements OnInit {
     };
 
     this.items = this.items ? [item, ...this.items] : [item];
+    this.homeStore.setItems({ items: this.items });
     textField.text = "";
     this.itemsScrollView.scrollToVerticalOffset(0, true);
   }
 
   private get itemsScrollView(): ScrollView {
     return this.itemsScrollViewElementRef.nativeElement;
+  }
+
+  private initListeners(): void {
+    this.homeStore.items$.subscribe((items) => {
+      this.items = items;
+      this.cdRef.detectChanges();
+    });
   }
 }
